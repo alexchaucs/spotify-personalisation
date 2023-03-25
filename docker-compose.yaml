@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    env_file: scripts/auth.env
     container_name: boiler-plate
     command: uvicorn src.main:app --host 0.0.0.0 --port 80 --reload --reload-include * ## by adding reload-include itll refresh on all
     ports:

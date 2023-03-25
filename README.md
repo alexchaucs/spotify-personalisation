@@ -1,5 +1,5 @@
-# fastapi-boilerplate
+# SPOTIFY GPT APP
 
-TODO
-* Integrate firestore reads
-* Introduce monorepo
+## TODO
+* Endpoint to login
+* Endpoint to retrieve data

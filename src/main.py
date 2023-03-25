@@ -3,9 +3,9 @@ from src.routes import auth, channels
 
 # Initalise app
 app = FastAPI(
-    title='Boiler plate api',
+    title='Spotify GPT App',
     description="""
-    This is a FastAPI boilet plate code
+    This is a FastAPI microservice for a Spotify + Open AI integrated service
     """,
     version='0.1.0'
 )

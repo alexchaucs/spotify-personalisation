@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    container_name: boiler-plate
+    command: uvicorn src.main:app --host 0.0.0.0 --port 80 --reload --reload-include * ## by adding reload-include itll refresh on all
+    ports:
+      - 8080:80
+    volumes: #syncs the files ## only updates when changes to python code not data like json
+      - .:/app

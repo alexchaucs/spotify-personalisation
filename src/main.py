@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
-from src.routes import auth, channels
+from src.routes import auth, channels, spotify
 
 # Initalise app
 app = FastAPI(
@@ -16,5 +16,6 @@ app.add_middleware(SessionMiddleware, secret_key="secret_key_placeholder")
 
 
 # Routers
-app.include_router(auth.router)
+# app.include_router(auth.router)
 app.include_router(channels.router)
+app.include_router(spotify.router)

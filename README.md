@@ -6,6 +6,7 @@
 
 # Backlog
 * frontend
+npm start
 
 
 * Understand how you will manage state, auth, user

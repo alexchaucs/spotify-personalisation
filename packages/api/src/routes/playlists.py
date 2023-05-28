@@ -8,7 +8,7 @@ cred = tk.Credentials(*conf)
 spotify = tk.Spotify()
 router = APIRouter()
 
-@router.get("/")
+@router.get("/get_playlists")
 async def get_playlists(request: Request):
     userId = request.cookies.get("app_spotify_user")
     token = tokens.get(userId)

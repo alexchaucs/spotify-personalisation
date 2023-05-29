@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.routes import playlists, auth, tests
+from src.routes import playlists, auth
 from fastapi.middleware.cors import CORSMiddleware
 
 # Initalise app
@@ -21,6 +21,5 @@ app.add_middleware(
 
 
 # Routers
-# app.include_router(auth.router)
-# app.include_router(playlists.router)
-app.include_router(tests.router)
+app.include_router(auth.router)
+app.include_router(playlists.router)

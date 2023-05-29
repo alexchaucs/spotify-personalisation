@@ -17,21 +17,25 @@ class SpotifyService:
         self.auths[userId] = {auth.state: auth}
         return auth, userId
 
-    def get_auth(self, userId, state: str):
+    def get_auth(self, userId: str, state: str):
         return self.auths.get(userId).get(state)
 
     def delete_auth(self, state: str):
         if state in self.auths:
             del self.auths[state]
 
-    def create_token(self, auth: tk.UserAuth, code: str, state: str):
+    def create_token(self, userId: str, auth: tk.UserAuth, code: str, state: str):
         token = auth.request_token(code, state)
-        self.tokens[state] = token
+        self.tokens[userId] = token
         return token
 
-    def get_token(self, state: str):
-        return self.tokens.get(state)
-
+    def get_token(self, userId: str):
+        token = self.tokens.get(userId)
+        if token.is_expiring:
+            token = self.cred.refresh(token)
+            self.tokens[userId] = token
+        return token
+    
     def delete_token(self, state: str):
         if state in self.tokens:
             del self.tokens[state]
@@ -46,3 +50,8 @@ class SpotifyService:
         
         except:
             return False
+    
+
+    def get_playlists(self, token):
+        with self.spotify.token_as(token):
+            return self.spotify.followed_playlists()

@@ -18,11 +18,13 @@ async def callback(request: Request, response: Response, code: str, state: str):
     auth = spotify_service.get_auth(userId, state)
     token = spotify_service.create_token(userId, auth, code, state)
     if token is None:
-        return {"error": "Invalid state"}
-    return {
-        "message": "Authorised successfully",
-        "token": token,
-        "userId": userId}
+        response.headers["Location"] = "http://localhost:3000/error"
+        response.status_code = 307
+        return {}
+    else:
+        response.headers["Location"] = "http://localhost:3000/success"
+        response.status_code = 307
+        return {}
 
 @router.get("/logout")
 async def logout(request: Request, response: Response):

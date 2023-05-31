@@ -1,5 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #282c34;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  font-size: 2.5em;
+  font-weight: bold;
+`;
+
+const Description = styled.p`
+  font-size: 1.2em;
+  font-weight: bold;
+`;
+
+const StyledButton = styled.button`
+  background-color: #1DB954; // Spotify green
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #1ED760;
+  }
+`;
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,16 +89,22 @@ const App: React.FC = () => {
   };
   
   return (
-    <div>
+    <Container>
+      <Title>Get Your Spotify Playlist Art Personalised</Title>
       {!isLoggedIn ? (
-        <button onClick={login}>Connect</button>
+        <Description>
+          Click on the
+          <StyledButton onClick={login}>Connect</StyledButton>
+          button to begin
+        </Description>
       ) : (
         <>
-          <button onClick={logout}>Logout</button>
-          <button onClick={getPlaylist}>Get Playlist</button>
+          <Description>You are connected to Spotify!</Description>
+          <StyledButton onClick={logout}>Logout</StyledButton>
+          <StyledButton onClick={getPlaylist}>Get Playlist</StyledButton>
         </>
       )}
-    </div>
+    </Container>
   );
 };
 

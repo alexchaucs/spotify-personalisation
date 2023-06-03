@@ -2,17 +2,46 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+interface Playlist {
+  name: string;
+  url: string;
+  description: string;
+}
+
+const PlaylistContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const PlaylistCard = styled.div`
+  width: 300px;
+  margin: 15px;
+  text-align: center;
+`;
+
+const PlaylistImage = styled.img`
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+`;
+
+const PlaylistDescription = styled.p`
+  font-size: 0.9em;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; // This line is updated
   background-color: #282c34;
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
 `;
+
 
 const Title = styled.h1`
   font-size: 2.5em;
@@ -42,6 +71,7 @@ const StyledButton = styled.button`
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -73,16 +103,15 @@ const App: React.FC = () => {
 
   const getPlaylist = async () => {
     try {
-      const response = await fetch('http://localhost:5000/playlists/follow', {
+      const response = await fetch('http://localhost:5000/playlists/images', {
         method: 'GET',
         credentials: 'include', // Send along cookies to the server
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const playlist = await response.json();
-      console.log(playlist);
-      // Do something with the playlist
+      const playlists = await response.json();
+      setPlaylists(playlists); // Set the state to the fetched playlists
     } catch (e) {
       console.error('Error:', e);
     }
@@ -102,6 +131,15 @@ const App: React.FC = () => {
           <Description>You are connected to Spotify!</Description>
           <StyledButton onClick={logout}>Logout</StyledButton>
           <StyledButton onClick={getPlaylist}>Get Playlist</StyledButton>
+          <PlaylistContainer>
+            {playlists.map((playlist, index) => (
+              <PlaylistCard key={index}>
+                <PlaylistImage src={playlist.url} alt={playlist.name} />
+                <h2>{playlist.name}</h2>
+                <PlaylistDescription>{playlist.description}</PlaylistDescription>
+              </PlaylistCard>
+            ))}
+          </PlaylistContainer>
         </>
       )}
     </Container>

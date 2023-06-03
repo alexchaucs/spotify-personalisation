@@ -2,6 +2,7 @@ import tekore as tk
 from typing import Dict
 import uuid
 import asyncio
+import html
 
 class Playlists:
     def __init__(self, token):
@@ -53,6 +54,10 @@ class Playlists:
         for i, playlist in enumerate(playlists):
             if playlist.owner.uri != user:
                 continue
-            userPlaylistsImages.append({"name": playlist.name, "url": playlist.images[0].url})
+            userPlaylistsImages.append({
+                "name": playlist.name,
+                "url": playlist.images[0].url,
+                "description": html.unescape(playlist.description)
+                })
 
         return userPlaylistsImages

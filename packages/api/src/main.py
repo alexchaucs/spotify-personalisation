@@ -22,4 +22,4 @@ app.add_middleware(
 
 # Routers
 app.include_router(auth.router)
-app.include_router(playlists.router)
+app.include_router(playlists.router, prefix = "/playlists")

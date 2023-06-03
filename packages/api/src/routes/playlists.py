@@ -5,11 +5,11 @@ from src.services import spotify_service
 
 router = APIRouter()
 
-@router.get("/get_playlists")
-async def get_playlists(request: Request):
+@router.get("/follow")
+async def get_playlists_follow(request: Request):
     userId = request.cookies.get("app_spotify_user")
     token = spotify_service.get_token(userId)
-    playlists = spotify_service.get_playlists(token)
+    playlists = await spotify_service.get_playlists_follow(token)
 
     return {"playlists": playlists.items}
 

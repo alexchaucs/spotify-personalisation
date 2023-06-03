@@ -73,7 +73,7 @@ const App: React.FC = () => {
 
   const getPlaylist = async () => {
     try {
-      const response = await fetch('http://localhost:5000/get_playlist', {
+      const response = await fetch('http://localhost:5000/playlists/follow', {
         method: 'GET',
         credentials: 'include', // Send along cookies to the server
       });

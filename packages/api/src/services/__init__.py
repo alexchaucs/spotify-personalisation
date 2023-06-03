@@ -1,3 +1,3 @@
-from src.services.spotify import SpotifyService
+from src.services.spotifyAuth import SpotifyAuth
 
-spotify_service = SpotifyService()
+spotify_auth = SpotifyAuth()

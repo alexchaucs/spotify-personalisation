@@ -2,7 +2,7 @@ import tekore as tk
 from typing import Dict
 import uuid
 
-class SpotifyService:
+class SpotifyAuth:
     def __init__(self):
         self.conf = tk.config_from_environment()
         self.cred = tk.Credentials(*self.conf)

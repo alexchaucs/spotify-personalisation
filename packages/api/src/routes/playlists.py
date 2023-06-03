@@ -20,7 +20,6 @@ async def get_playlists_follow(request: Request):
     token = spotify_auth.get_token(userId)
     playlist = Playlists(token)
     playlist.followed_playlists = await playlist.get_playlists_follow()
-    print(len(playlist.followed_playlists.items))
     return {"followed_playlists": playlist.followed_playlists.items}
 
 
@@ -31,7 +30,16 @@ async def get_playlists_user(request: Request):
     playlist = Playlists(token)
     current_user_uri = await playlist.current_user()
     playlist.user_playlists = await playlist.get_playlists_user(current_user_uri.uri)
-    print(len(playlist.user_playlists))
     return {"user_playlists": playlist.user_playlists}
+
+
+@router.get("/images")
+async def get_playlists_user_images(request: Request):
+    userId = request.cookies.get("app_spotify_user")
+    token = spotify_auth.get_token(userId)
+    playlist = Playlists(token)
+    current_user_uri = await playlist.current_user()
+    playlist.user_images = await playlist.get_playlists_images(current_user_uri.uri)
+    return playlist.user_images
 
 

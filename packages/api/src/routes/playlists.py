@@ -39,7 +39,14 @@ async def get_playlists_user_images(request: Request):
     token = spotify_auth.get_token(userId)
     playlist = Playlists(token)
     current_user_uri = await playlist.current_user()
-    playlist.user_images = await playlist.get_playlists_images(current_user_uri.uri)
-    return playlist.user_images
+    playlist.user = await playlist.get_playlists_data(current_user_uri.uri)
+    return playlist.user
 
 
+@router.get("/id/{playlistID}")
+async def get_playlist_data(playlistID:str, request: Request):
+    userId = request.cookies.get("app_spotify_user")
+    token = spotify_auth.get_token(userId)
+    playlist = Playlists(token)
+    playlist.data = await playlist.get_playlist_tracks(playlistID)
+    return playlist.data

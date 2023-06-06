@@ -112,5 +112,5 @@ class Playlists:
         # TODO - implement work and queue (sempaphore and task queue) to prevent to chain gather requests
         trackIds = await self.get_playlist_tracks_ids(playlistID)
         trackFeatures = await self.get_tracks_audio_features(trackIds)
-
-        return trackFeatures
+        
+        return [track.__dict__ for track in trackFeatures if track is not None]

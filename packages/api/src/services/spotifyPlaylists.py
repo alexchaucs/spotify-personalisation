@@ -84,7 +84,7 @@ class Playlists:
         inital_response = await self.spotify.playlist_items(playlistID, limit = 1, offset = 0)
         total = inital_response.total 
         playlistTracks.extend(inital_response.items)
-        limit = 50
+        limit = 100
         numOfCalls = (total - 1)//limit + 1
         
         tasks = [self.spotify.playlist_items(playlistID, limit = limit, offset = 1 + limit * i) for i in range(numOfCalls)]
@@ -109,7 +109,8 @@ class Playlists:
 
 
     async def get_playlist_tracks_audio_features(self, playlistID: str):
+        # TODO - implement work and queue (sempaphore and task queue) to prevent to chain gather requests
         trackIds = await self.get_playlist_tracks_ids(playlistID)
         trackFeatures = await self.get_tracks_audio_features(trackIds)
-        
+
         return trackFeatures

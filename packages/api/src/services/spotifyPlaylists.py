@@ -77,3 +77,39 @@ class Playlists:
             playlistData.extend(response.items)
 
         return playlistData
+
+
+    async def get_playlist_tracks_ids(self, playlistID: str):
+        playlistTracks = []
+        inital_response = await self.spotify.playlist_items(playlistID, limit = 1, offset = 0)
+        total = inital_response.total 
+        playlistTracks.extend(inital_response.items)
+        limit = 50
+        numOfCalls = (total - 1)//limit + 1
+        
+        tasks = [self.spotify.playlist_items(playlistID, limit = limit, offset = 1 + limit * i) for i in range(numOfCalls)]
+        responses = await asyncio.gather(*tasks)
+        for response in responses:
+            playlistTracks.extend(response.items)
+
+        return [track.track.id for track in playlistTracks]
+
+    async def get_tracks_audio_features(self, tracks: list):
+        trackFeatures = []
+        total = len(tracks)
+        limit = 50
+        numOfCalls = (total)//limit + 1
+        
+        tasks = [self.spotify.tracks_audio_features(tracks[i*limit : (i + 1) * limit]) for i in range(numOfCalls)]
+        responses = await asyncio.gather(*tasks)
+        for response in responses:
+            trackFeatures.extend(response)
+
+        return trackFeatures
+
+
+    async def get_playlist_tracks_audio_features(self, playlistID: str):
+        trackIds = await self.get_playlist_tracks_ids(playlistID)
+        trackFeatures = await self.get_tracks_audio_features(trackIds)
+        
+        return trackFeatures

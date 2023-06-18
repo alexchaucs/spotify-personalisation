@@ -48,8 +48,8 @@ async def get_tracks_audio_features(spotify, tracks: list):
     return trackFeatures
 
 
-async def get_playlists_audio_features(spotify, playlists_ids: list):
+# async def get_playlists_audio_features(spotify, playlists_ids: list):
 
-    tasks = [get_playlist_tracks_ids(spotify, id) for id in playlists_ids]
+#     tasks = [get_playlist_tracks_ids(spotify, id) for id in playlists_ids]
     
-    return [track.__dict__ for track in trackFeatures if track is not None]
+#     return [track.__dict__ for track in trackFeatures if track is not None]

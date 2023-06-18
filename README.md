@@ -16,7 +16,7 @@ Backend
 
 * Train basic classifier
     * Then taking the average score to determine where to classify
-    * This average can be the whole playlist or a select few songs
+    * This average can be the whole playlist or a select few songs  
 * Explore use of a LLM 
 * Endpoint to serve 
 

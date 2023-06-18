@@ -30,7 +30,7 @@ async def get_playlist_tracks_ids(spotify, playlistID: str):
     for response in responses:
         playlistTracks.extend(response.items)
 
-    return playlistTracks #[track.track.id for track in playlistTracks]
+    return playlistTracks#[track.track.id for track in playlistTracks]
 
 
 async def get_tracks_audio_features(spotify, tracks: list):

@@ -3,8 +3,8 @@ services:
     build: .
     env_file: scripts/auth.env
     container_name: boiler-plate
-    command: uvicorn src.main:app --host 0.0.0.0 --port 80 --reload --reload-include * ## by adding reload-include itll refresh on all
+    command: poetry run uvicorn src.main:app --host 0.0.0.0 --port 80 --reload --reload-include *
     ports:
       - 5000:80
-    volumes: #syncs the files ## only updates when changes to python code not data like json
+    volumes:
       - .:/app

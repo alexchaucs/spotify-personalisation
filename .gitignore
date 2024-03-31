@@ -1,3 +1,7 @@
+# auth
+packages/api/scripts/auth.env
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

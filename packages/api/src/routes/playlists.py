@@ -1,5 +1,4 @@
-import tekore as tk
-from fastapi import APIRouter, Response, Request
+from fastapi import APIRouter, Request
 from src.services import spotify_auth
 from src.services.spotifyPlaylists import Playlists
 

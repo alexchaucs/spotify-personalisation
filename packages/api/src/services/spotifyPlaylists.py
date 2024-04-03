@@ -1,6 +1,4 @@
 import tekore as tk
-from typing import Dict
-import uuid
 import asyncio
 import html
 
@@ -29,7 +27,7 @@ class Playlists:
             playlists.extend(response.items)
 
         userPlaylists = []
-        for i, playlist in enumerate(playlists):
+        for _, playlist in enumerate(playlists):
             if playlist.owner.uri != user:
                 continue
             userPlaylists.append(playlist)
@@ -51,7 +49,7 @@ class Playlists:
             playlists.extend(response.items)
 
         userPlaylistsData = []
-        for i, playlist in enumerate(playlists):
+        for _, playlist in enumerate(playlists):
             if playlist.owner.uri != user:
                 continue
             userPlaylistsData.append({

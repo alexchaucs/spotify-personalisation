@@ -47,6 +47,6 @@ class SpotifyAuth:
             if userId in self.auths:
                 del self.auths[userId]  
             return True
-        
-        except:
+        except Exception as e:
+            print(e)
             return False

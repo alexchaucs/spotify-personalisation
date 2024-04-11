@@ -1,5 +1,4 @@
 import tekore as tk
-import asyncio
 import html
 
 class Playlists:

@@ -83,12 +83,12 @@ const App: React.FC = () => {
   }, [location, navigate]);
 
   const login = () => {
-    window.location.href = 'http://localhost:5000/login';
+    window.location.href = 'http://localhost:5001/login';
   };
 
   const logout = async () => {
     try {
-      const response = await fetch('http://localhost:5000/logout', {
+      const response = await fetch('http://localhost:5001/logout', {
         method: 'GET',
         credentials: 'include', // Send along cookies to the server
       });
@@ -103,7 +103,7 @@ const App: React.FC = () => {
 
   const getPlaylist = async () => {
     try {
-      const response = await fetch('http://localhost:5000/playlists/images', {
+      const response = await fetch('http://localhost:5001/playlists/images', {
         method: 'GET',
         credentials: 'include', // Send along cookies to the server
       });

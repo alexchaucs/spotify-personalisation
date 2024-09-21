@@ -5,6 +5,6 @@ services:
     container_name: boiler-plate
     command: poetry run uvicorn src.main:app --host 0.0.0.0 --port 80 --reload --reload-include *
     ports:
-      - 5000:80
+      - 5001:80
     volumes:
       - .:/app

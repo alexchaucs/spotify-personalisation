@@ -5,3 +5,9 @@ To execute run. This will build the docker image and port forward to your local 
 ``` python
 make dev-container
 ```
+
+Testing
+```
+http://localhost:5001/login
+http://localhost:5001/playlists/follow
+```
